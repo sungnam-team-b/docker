@@ -5,7 +5,9 @@ volumes:
 
 services:
   backend:
-    build: ./backend
+    build: 
+      context: ./backend
+      dockerfile: dockerfile
     command: >
       bash -c "python manage.py makemigrations &&
                python manage.py migrate &&
