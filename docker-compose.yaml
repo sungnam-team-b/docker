@@ -1,6 +1,47 @@
-version: "3.7"
+version: "3.8"
+
+volumes:
+  mysql_data:
+  redisdata:
 
 services:
+  mysqldb:
+    build: ./backend/db
+    env_file:
+      - "./backend/db/db.env"
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend/backend
+    command: >
+      bash -c "python wait_mysql.py &&
+               python manage.py makemigrations &&
+               python manage.py migrate &&
+               python manage.py loaddata fixture.json
+               python manage.py runserver 0.0.0.0:8080" &&
+               
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mysqldb
+      - redis
+    links:
+      - mysqldb
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    hostname: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - 'redisdata:/data'
+
   nginx:
     restart: always
     container_name: nginx
@@ -26,3 +67,5 @@ services:
 networks:
   frontend:
     driver: bridge
+
+  
