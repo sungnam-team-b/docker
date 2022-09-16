@@ -26,7 +26,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./backend:/app
+      - ./backend/backend:/app
     depends_on:
       - mysqldb
       - redis
@@ -42,30 +42,30 @@ services:
     volumes:
       - 'redisdata:/data'
 
-  nginx:
-    restart: always
-    container_name: nginx
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "3000:80"
-    networks:
-      - frontend
+ # nginx:
+ #   restart: always
+ #   container_name: nginx
+ #   build:
+ #     context: ./nginx
+ #     dockerfile: Dockerfile
+ #   ports:
+ #     - "3000:80"
+ #   networks:
+ #     - frontend
 
-  client:
-    container_name: client
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes:
-      - "./frontend/:/app"
-      - "/app/node_modules"
-    networks:
-      - frontend
+ # client:
+ #   container_name: client
+ #   build:
+ #     context: ./frontend
+ #     dockerfile: Dockerfile
+ #   volumes:
+ #     - "./frontend/:/app"
+ #     - "/app/node_modules"
+ #   networks:
+ #     - frontend
 
-networks:
-  frontend:
-    driver: bridge
+#networks:
+#  frontend:
+#    driver: bridge
 
   
