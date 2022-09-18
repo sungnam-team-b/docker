@@ -43,27 +43,17 @@ services:
       - 'redisdata:/data'
 
   nginx:
-    build: ./backend/nginx
+    build: ./nginx
     ports:
-      - 80:80
+      - "80:80"
     volumes:
-      - ./backend/nginx/nginx:/etc/nginx
+      - ./nginx:/etc/nginx/conf.d
     depends_on:
       - backend
 
-  client:
-    container_name: client
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes:
-      - "./frontend/:/app"
-      - "/app/node_modules"
-    networks:
-      - frontend
-
-networks:
   frontend:
-    driver: bridge
-
-  
+    build: ./frontend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
