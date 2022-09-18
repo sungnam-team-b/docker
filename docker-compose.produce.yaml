@@ -21,7 +21,7 @@ services:
                python manage.py makemigrations &&
                python manage.py migrate &&
                python manage.py loaddata fixture.json &&
-               gunicorn backend.wsgi:application --bind 0.0.0.0:8080" &&
+               python manage.py runserver 0.0.0.0:8080" &&
                
     ports:
       - "8080:8080"
@@ -42,28 +42,14 @@ services:
     volumes:
       - 'redisdata:/data'
 
-  nginx:
-    build: ./backend/nginx
+  frontend:
+    build: ./frontend
+    command: ["npm", "start"]
     ports:
-      - 80:80
+      - 3000:3000
     volumes:
-      - ./backend/nginx/nginx:/etc/nginx
-    depends_on:
-      - backend
-
-  client:
-    container_name: client
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes:
-      - "./frontend/:/app"
-      - "/app/node_modules"
-    networks:
-      - frontend
+      - ./frontend:/app
 
 networks:
   frontend:
     driver: bridge
-
-  
