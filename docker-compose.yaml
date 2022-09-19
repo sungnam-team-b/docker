@@ -50,6 +50,7 @@ services:
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - backend
+      - frontend
 
   frontend:
     build: ./frontend
