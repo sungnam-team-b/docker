@@ -3,6 +3,7 @@ version: "3.8"
 volumes:
   mysql_data:
   redisdata:
+  build_folder:
 
 services:
   mysqldb:
@@ -47,21 +48,18 @@ services:
     ports:
       - "80:80"
     volumes:
+      - build_folder:/var/www/frontend
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - backend
+      - client
 
   client:
     container_name: client
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      args:
+        API_URL: "*"
     volumes:
       - "./frontend/:/app"
-      - "/app/node_modules"
-    networks:
-      - frontend
-
-networks:
-  frontend:
-    driver: bridge
+      - build_folder:/frontend/build
