@@ -48,8 +48,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - build_folder:/var/www/frontend
-      - ./nginx:/etc/nginx/conf.d
+      - build_folder:/var/www/app
     depends_on:
       - backend
       - client
@@ -58,8 +57,8 @@ services:
     container_name: client
     build:
       context: ./frontend
-      args:
-        API_URL: "*"
+      dockerfile: Dockerfile
     volumes:
-      - "./frontend/:/app"
-      - build_folder:/frontend/build
+      - ./frontend/:/app
+      - build_folder:/app/build
+    tty: true
