@@ -48,7 +48,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - build_folder:/var/www/app
+      - build_folder:/var/www/frontend
     depends_on:
       - backend
       - client
@@ -59,8 +59,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     volumes:
-      - ./frontend/:/app
-      - build_folder:/app/build
+      - ./frontend/:/frontend
+      - build_folder:/frontend/build
     tty: true
 
   rabbitmq:
