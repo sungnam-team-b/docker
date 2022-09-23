@@ -3,7 +3,6 @@ version: "3.8"
 volumes:
   mysql_data:
   redisdata:
-  build_folder:
 
 services:
   mysqldb:
@@ -22,7 +21,7 @@ services:
                python manage.py makemigrations &&
                python manage.py migrate &&
                python manage.py loaddata fixture.json &&
-               gunicorn backend.wsgi:application --bind 0.0.0.0:8080" &&
+               python manage.py runserver 0.0.0.0:8080" &&
                
     ports:
       - "8080:8080"
@@ -43,22 +42,14 @@ services:
     volumes:
       - 'redisdata:/data'
 
-  nginx:
-    build: ./nginx
+  frontend:
+    build: ./frontend
+    command: ["npm", "start"]
     ports:
-      - "80:80"
+      - 3000:3000
     volumes:
-      - build_folder:/var/www/app
-    depends_on:
-      - backend
-      - client
+      - ./frontend:/app
 
-  client:
-    container_name: client
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    volumes:
-      - ./frontend/:/app
-      - build_folder:/app/build
-    tty: true
+networks:
+  frontend:
+    driver: bridge
