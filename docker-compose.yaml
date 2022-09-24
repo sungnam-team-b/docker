@@ -81,7 +81,7 @@ services:
       context: ./backend/backend
       dockerfile: dockerfile
     volumes:
-      - ./backend:/app
+      - ./backend/backend:/app
     ports: []
     depends_on:
       - rabbitmq
