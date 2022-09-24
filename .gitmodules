@@ -1,6 +1,9 @@
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/sungnam-team-b/frontend.git
+	branch = main
 [submodule "backend"]
 	path = backend
 	url = https://github.com/sungnam-team-b/backend.git
+	bran = main
+
