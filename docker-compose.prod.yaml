@@ -23,7 +23,7 @@ services:
                python manage.py makemigrations &&
                python manage.py migrate &&
                python manage.py loaddata fixture.json &&
-               python manage.py runserver 0.0.0.0:8080" &&
+               gunicorn backend.wsgi:application --bind 0.0.0.0:8080" &&
                
     ports:
       - "8080:8080"
@@ -44,15 +44,26 @@ services:
     volumes:
       - 'redisdata:/data'
 
-  frontend:
-    build: ./frontend
-    command: ["npm", "start"]
+  nginx:
+    build: ./nginx
     ports:
-      - 3000:3000
+      - "80:80"
     volumes:
-      - ./frontend:/app
+      - build_folder:/var/www/frontend
+    depends_on:
+      - backend
+      - client
 
-  
+  client:
+    container_name: client
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/:/frontend
+      - build_folder:/frontend/build
+    tty: true
+
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq:3-management-alpine
@@ -110,7 +121,3 @@ services:
       - prometheus
     # network_mode: host
     restart: always
-
-networks:
-  frontend:
-    driver: bridge
