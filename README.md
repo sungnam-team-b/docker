@@ -49,13 +49,12 @@
     - set JWT’s default_settings
         
 - JWT on frontEND
-    - restore tokens by using redux
-    - if we need some user data, we don’t need to make connection with backend
-    by opening JWT payload, we can get user data
+    - 리덕스를 활용하여 refresh token과 access token을 보관합니다.
+    - 사용자의 정보가 필요하면 데이터베이스에 조회하지 않고 access token을 이용하여 사용자의 정보를 파악합니다.
     
 - JWT on backEND
-    - after we identify user by check login data, give authorization by using JWT
-    - by using refresh_token, we enhanced our security level
+    - 요청이 들어오면 토큰으로 해당 유저가 맞는지 확인해주고 그에 맞는 응답을 해줍니다.
+    - refresh token을 추가로 활용하여 보안을 강화하였습니다.
 
 
 
