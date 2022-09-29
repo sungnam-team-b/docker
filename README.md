@@ -17,11 +17,6 @@
 |__Monitoring__| <img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=Prometheus&logoColor=black"> <img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=Grafana&logoColor=black"> <img src="https://img.shields.io/badge/cAdvisor-2496ED?style=for-the-badge&logo=cAdvisor&logoColor=white"> |
 |__Others__| <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=black"> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=black"> <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white"> <img src="https://img.shields.io/badge/GitKraken-179287?style=for-the-badge&logo=GitKraken&logoColor=black"> <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=black"> |
 
-
-## 🌸 **Core Screens**
-
-<img src="https://user-images.githubusercontent.com/41159837/183132826-5238c9e3-b067-4cfc-a2b3-bed4c43f6dbd.png" width="50%" height="50%"/>
-
 ### Mainpage
 
 ## 🌿 ERD
