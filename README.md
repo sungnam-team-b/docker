@@ -22,30 +22,24 @@
 
 ### **users api**
 
-- ***api/users/***
+- ***api/v1/users/***
     - `GET` : 회원가입 시 아이디, 닉네임 중복 체크 결과
     - `POST` : 회원 가입 정보 저장
-- ***api/users/auth***
+- ***api/v1/users/auth***
     - `POST` : access token, refresh token 갱신
 
-### **animal api**
+### **animals api**
 
-- ***api/challenges***
-    - `GET` : 모든 도전과제 정보
-- ***api/statistics/ranking***
-    - `GET` : 인기순으로 정렬된 일주일간의 재활용 데이터
-- ***api/users/{user_id}/results/tasks***
-    - `POST` : 사용자가 업로드한 사진 분석 비동기 처리
-- ***api/users/{user_id}/results/tasks/{task_id}***
-    - `GET` : task_id로 분석 완료 여부 확인, 프론트에서 polling
-- ***api/users/{user_id}/challenges***
-    - `GET` : 사용자가 달성한 도전과제 정보
-- ***api/users/{user_id}/pages/{page_number}***
-    - `GET` : 사용자가 업로드한 재활용 이미지 데이터, 페이지네이션 이용
-- ***api/trash/users/{user_id}/statistics***
-    - `GET` : 사용자가 업로드한 모든 재활용 데이터의 통계
-- ***api/trash/users/{user_id}/statistics/period/{from_date}/{to_date}***
-    - `GET` : 사용자가 설정한 날에 따른 재활용 데이터 통계
+- ***api/v1/animals/animalist***
+    - `GET` : 모든 십이지신 운세 정보
+- ***api/v1/animals/rank***
+    - `GET` : 가장 십이지신과 닮은 사람들의 랭킹 (기간 : 일주일)
+- ***api/v1/animals/user/{user_id}***
+    - `POST` : 사용자가 업로드한 사진 분석하는 task id
+- ***api/v1/animals/user/{user_id}/tasks/{task_id}***
+    - `POST` : task id을 이용한 사진 분석 결과
+- ***api/v1/animals/user/{user_id}/mypage***
+    - `GET` : 사용자가 올린 사진들에 대한 정보
 
 ## JWT
 
